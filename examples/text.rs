@@ -13,7 +13,11 @@ fn main() {
 
     let font = match handle {
         Handle::Path { path, font_index } => {
+            println!("path:{:?}", path);
+            println!("font_index:{:?}", font_index);
+
             let mut file = File::open(path).unwrap();
+            // dbg!(path);
             let mut buf = Vec::new();
             file.read_to_end(&mut buf).unwrap();
             Font::try_from_vec_and_index(buf, font_index).unwrap()
@@ -29,7 +33,7 @@ fn main() {
     let text = Text::builder()
         .size(50.0)
         .start(Point { x, y })
-        .build(&font, "text-svg");
+        .build(&font, "Hulken");
 
     let document = Document::new()
         .set("width", text.bounding_box.max.x + x)

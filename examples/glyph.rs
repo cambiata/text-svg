@@ -13,7 +13,10 @@ fn main() {
 
     let font = match handle {
         Handle::Path { path, font_index } => {
-            let mut file = File::open(path).unwrap();
+            println!("path:{:?}", path);
+            println!("font_index:{}", font_index);
+            let p2 = "C:\\WINDOWS\\FONTS\\ARIAL.TTF".to_string();
+            let mut file = File::open(p2).unwrap();
             let mut buf = Vec::new();
             file.read_to_end(&mut buf).unwrap();
             Font::try_from_vec_and_index(buf, font_index).unwrap()
@@ -23,7 +26,7 @@ fn main() {
         }
     };
 
-    let glyph = Glyph::new(&font, 'F', 20.);
+    let glyph = Glyph::new(&font, 'F', 100.);
     let document = Document::new()
         .set("width", 10. + glyph.bounding_box.width())
         .set("height", 10. + glyph.bounding_box.height())
