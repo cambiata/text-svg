@@ -2,7 +2,7 @@ use rusttype::{Font, Point};
 use svg::{node::element::Rectangle, Document};
 use text_svg::Text;
 fn main() {
-    let font_data = include_bytes!("../AvenirNextCyr-Bold.ttf");
+    let font_data = include_bytes!("../MTF-Cadence-Fin.ttf");
     let font = Font::try_from_bytes(font_data as &[u8]).expect("Error constructing Font");
 
     let x = 5.;
