@@ -60,7 +60,21 @@ impl Builder<'_> {
                 y: self.start.y + v_metrics.ascent,
             },
         ) {
-            let bounding_box = glyph.unpositioned().exact_bounding_box().unwrap();
+            let bounding_box = match glyph.unpositioned().exact_bounding_box() {
+                Some(bounding_box) => bounding_box,
+                None => Rect {
+                    min: Point {
+                        x: scale.x / 5.,
+                        y: 0.,
+                    },
+                    max: Point {
+                        x: scale.x / 5.,
+                        y: 0.,
+                    },
+                },
+            };
+
+            // let bounding_box = glyph.unpositioned().exact_bounding_box().unwrap();
             x += bounding_box.min.x;
 
             glyph.build_outline(&mut crate::Builder {
